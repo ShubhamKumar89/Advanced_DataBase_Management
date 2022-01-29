@@ -1,13 +1,14 @@
 #include <iostream>
 #include <stack>
+#include <string>
 #include <windows.h>
 using namespace std;
 
-stack<string> name;
-stack<long int> admNo;
-stack<string> course;
-stack<int> year;
-stack<string> sector;
+stack<string> name;    // main stack that store all the names
+stack<long int> admNo; // main stack that store all the admission no.
+stack<string> course;  // main stack that store all the courses
+stack<int> year;       // main stack that store all the College year
+stack<string> sector;  // main stack that store all the fields
 
 class manage
 {
@@ -27,6 +28,7 @@ public:
     void desireData(manage data);
 };
 
+// used to insert pre-defined data
 void manage::insertedData(manage &data, string n, long int a, string c, int y, string i)
 {
     data.nam = n;
@@ -47,10 +49,11 @@ void manage::insertedData(manage &data, string n, long int a, string c, int y, s
     return;
 }
 
+// this function is used to insert user define data
 void manage::insertData(manage &data)
 {
     system("cls");
-    string str = "Enter the following data :";
+    string str = "\n      Add a new Entry : \n";
     cout << "                    ";
     for (int i = 0; i < str.size(); i++)
     {
@@ -58,25 +61,25 @@ void manage::insertData(manage &data)
         Sleep(10);
     }
 
-    cout << "\n\nName : ";
+    cout << "\n\n      Name : ";
     cin.ignore();
     getline(cin, data.nam);
     name.push(data.nam);
 
-    cout << "\nAdmission Number : ";
+    cout << "\n      Admission Number : ";
     cin >> data.adm;
     admNo.push(data.adm);
 
-    cout << "\nCourse : ";
+    cout << "\n      Course : ";
     cin.ignore();
     getline(cin, data.cor);
     course.push(data.cor);
 
-    cout << "\nCollege Year : ";
+    cout << "\n      College Year : ";
     cin >> data.yr;
     year.push(data.yr);
 
-    cout << "\nInterest Field : ";
+    cout << "\n      Field of Interest : ";
     cin.ignore();
     getline(cin, data.itrf);
     sector.push(data.itrf);
@@ -100,12 +103,12 @@ void displayUpdateName(long int ad)
         if (a.top() == ad)
         {
 
-            cout << "\nThe wrong data : \n\n";
+            cout << "\n Wrong data : \n\n";
             cout << "Name : " << n.top() << endl;
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
             break;
         }
         temp.push(i);
@@ -120,7 +123,7 @@ void displayUpdateName(long int ad)
          << endl;
     n = name;
 
-    stack<int> temp3 = temp;
+    stack<int> temp3 = temp; // define, in order to run the next->next while loop
     cout << "Enter the Correct Course Name : ";
 
     cin.ignore();
@@ -147,7 +150,7 @@ void displayUpdateName(long int ad)
         temp2.pop();
     }
 
-    cout << "\n\n              Thank you for updating the data.. \n\n\n\n";
+    cout << "\n\n              Information has been Updated.. \n\n\n\n";
     system("pause");
     return;
 }
@@ -155,31 +158,31 @@ void displayUpdateName(long int ad)
 void updateName(manage data)
 {
     system("cls");
-    stack<long int> a = admNo;
-    stack<int> temp1;
-    stack<long int> temp2;
+    stack<long int> a = admNo; // traverse through admNo
+    stack<int> temp1;          // used for identifying the serial no. entered by the user
+    stack<long int> temp2;     // aim is to locate the data which is going to be change
     int key;
-    cout << "\nWhich student data, u want to update : \n\n";
+    cout << "\n      Here are the admission No. of students, select one of the following : \n\n";
     int i = 1;
     int flag;
     while (!a.empty())
     {
         temp1.push(i);
         temp2.push(a.top());
-        cout << "   (" << i << ") " << a.top() << endl;
+        cout << "     (" << i << ") " << a.top() << endl;
         a.pop();
         i++;
     }
     cout << endl
          << endl;
-    string str = "Press the key according to your Preference :";
+    string str = " Press the key according to your Preference :";
     cout << "     ";
     for (int i = 0; i < str.size(); i++)
     {
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n    ==> ";
     cin >> key;
 
     while (!temp1.empty() && !temp2.empty())
@@ -201,7 +204,7 @@ void updateName(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -216,7 +219,7 @@ void updateName(manage data)
             data.updateData(data);
     }
 
-    displayUpdateName(temp2.top());
+    displayUpdateName(temp2.top()); // call to update the name
 }
 
 void displayUpdateAdm(string nm)
@@ -237,12 +240,12 @@ void displayUpdateAdm(string nm)
         if (n.top() == nm)
         {
 
-            cout << "\nThe wrong data : \n\n";
+            cout << "\n Wrong data : \n\n";
             cout << "Name : " << n.top() << endl;
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
             break;
         }
         temp.push(i);
@@ -278,7 +281,7 @@ void displayUpdateAdm(string nm)
         temp.pop();
     }
 
-    cout << "\n\n              Thank you for updating the data.. \n\n\n\n";
+    cout << "\n\n              Information has been Updated.. \n\n\n\n";
     system("pause");
     return;
 }
@@ -290,14 +293,14 @@ void updateAdm(manage data)
     stack<int> temp1;
     stack<string> temp2;
     int key;
-    cout << "\nWhich student data, u want to update : \n\n";
+    cout << "\n      Select from the following to update Admission No. : \n\n";
     int i = 1;
     int flag;
     while (!n.empty())
     {
         temp1.push(i);
         temp2.push(n.top());
-        cout << "   (" << i << ") " << n.top() << endl;
+        cout << "     (" << i << ") " << n.top() << endl;
         n.pop();
         i++;
         flag = i;
@@ -311,7 +314,7 @@ void updateAdm(manage data)
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n    ==> ";
     cin >> key;
 
     while (!temp1.empty() && !temp2.empty())
@@ -333,7 +336,7 @@ void updateAdm(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -369,12 +372,12 @@ void displayUpdateCourse(string nm)
         if (n.top() == nm)
         {
 
-            cout << "\nThe wrong data : \n\n";
+            cout << "\n Wrong data : \n\n";
             cout << "Name : " << n.top() << endl;
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
             break;
         }
         temp.push(i);
@@ -415,7 +418,7 @@ void displayUpdateCourse(string nm)
         temp2.pop();
     }
 
-    cout << "\n\n              Thank you for updating the data.. \n\n\n\n";
+    cout << "\n\n              Information has been Updated.. \n\n\n\n";
     system("pause");
     return;
 }
@@ -427,14 +430,14 @@ void updateCourse(manage data)
     stack<int> temp1;
     stack<string> temp2;
     int key;
-    cout << "\nWhich student data, u want to update : \n\n";
+    cout << "\n      Select from the following to update the Course Name : \n\n";
     int i = 1;
     int flag;
     while (!n.empty())
     {
         temp1.push(i);
         temp2.push(n.top());
-        cout << "   (" << i << ") " << n.top() << endl;
+        cout << "     (" << i << ") " << n.top() << endl;
         n.pop();
         i++;
         flag = i;
@@ -448,7 +451,7 @@ void updateCourse(manage data)
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n    ==> ";
     cin >> key;
 
     while (!temp1.empty() && !temp2.empty())
@@ -470,7 +473,7 @@ void updateCourse(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -506,12 +509,12 @@ void displayUpdateYear(string nm)
         if (n.top() == nm)
         {
 
-            cout << "\nThe wrong data : \n\n";
+            cout << "\n Wrong data : \n\n";
             cout << "Name : " << n.top() << endl;
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
             break;
         }
         temp.push(i);
@@ -526,7 +529,7 @@ void displayUpdateYear(string nm)
          << endl;
     y = year;
     stack<int> temp3 = temp;
-    cout << "Enter the Correct Graduation Year : ";
+    cout << "Enter the Correct College Year : ";
 
     cin >> correctYear;
 
@@ -551,7 +554,7 @@ void displayUpdateYear(string nm)
         temp2.pop();
     }
 
-    cout << "\n\n              Thank you for updating the data.. \n\n\n\n";
+    cout << "\n\n              Information has been Updated.. \n\n\n\n";
     system("pause");
     return;
 }
@@ -563,14 +566,14 @@ void updateYear(manage data)
     stack<int> temp1;
     stack<string> temp2;
     int key;
-    cout << "\nWhich student data, u want to update : \n\n";
+    cout << "\n      Select from the following to update the College Year  : \n\n";
     int i = 1;
     int flag;
     while (!n.empty())
     {
         temp1.push(i);
         temp2.push(n.top());
-        cout << "   (" << i << ") " << n.top() << endl;
+        cout << "    (" << i << ") " << n.top() << endl;
         n.pop();
         i++;
         flag = i;
@@ -584,7 +587,7 @@ void updateYear(manage data)
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n    ==> ";
     cin >> key;
 
     while (!temp1.empty() && !temp2.empty())
@@ -606,7 +609,7 @@ void updateYear(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -642,12 +645,12 @@ void displayUpdateField(string nm)
         if (n.top() == nm)
         {
 
-            cout << "\nThe wrong data : \n\n";
+            cout << "\n Wrong data : \n\n";
             cout << "Name : " << n.top() << endl;
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
             break;
         }
         temp.push(i);
@@ -662,7 +665,7 @@ void displayUpdateField(string nm)
          << endl;
     s = sector;
     stack<int> temp3 = temp;
-    cout << "Enter the Correct Interest Field : ";
+    cout << "Enter the Correct Field of Interest : ";
 
     cin.ignore();
     getline(cin, correctField);
@@ -688,7 +691,7 @@ void displayUpdateField(string nm)
         temp2.pop();
     }
 
-    cout << "\n\n              Thank you for updating the data.. \n\n\n\n";
+    cout << "\n\n              Information has been Updated.. \n\n\n\n";
     system("pause");
     return;
 }
@@ -700,14 +703,14 @@ void updateField(manage data)
     stack<int> temp1;
     stack<string> temp2;
     int key;
-    cout << "\nWhich student data, u want to update : \n\n";
+    cout << "\n     Select from the following to update the Field of interest  : \n\n";
     int i = 1;
     int flag;
     while (!n.empty())
     {
         temp1.push(i);
         temp2.push(n.top());
-        cout << "   (" << i << ") " << n.top() << endl;
+        cout << "    (" << i << ") " << n.top() << endl;
         n.pop();
         i++;
         flag = i;
@@ -715,13 +718,13 @@ void updateField(manage data)
     cout << endl
          << endl;
     string str = "Press the key according to your Preference :";
-    cout << "     ";
+    cout << "      ";
     for (int i = 0; i < str.size(); i++)
     {
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n    ==> ";
     cin >> key;
 
     while (!temp1.empty() && !temp2.empty())
@@ -743,7 +746,7 @@ void updateField(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -769,22 +772,22 @@ void manage ::updateData(manage data)
     do
     {
         system("cls");
-        cout << "\n        You want to change what :\n\n";
+        cout << "\n          What do you want to Change :\n\n";
         cout << "          (1) Name\n";
         cout << "          (2) Admission No.\n";
         cout << "          (3) Course\n";
-        cout << "          (4) Graduation Year\n";
-        cout << "          (5) Interest Field\n";
+        cout << "          (4) College Year\n";
+        cout << "          (5) Field of Interest\n";
         cout << "          (6) Back  \n\n";
 
         string str = "Press the key according to your Preference :";
-        cout << "     ";
+        cout << "          ";
         for (int i = 0; i < str.size(); i++)
         {
             cout << str[i];
             Sleep(10);
         }
-        cout << "\n      ==> ";
+        cout << "\n       ==> ";
         cin >> key;
         switch (key)
         {
@@ -848,7 +851,7 @@ void manage::display()
     stack<string> c = course;
     stack<int> y = year;
     stack<string> s = sector;
-
+    cout << "Showing Entire data : \n\n\n";
     while (!n.empty() && !a.empty() && !y.empty() && !c.empty() && !s.empty())
     {
 
@@ -864,7 +867,7 @@ void manage::display()
         cout << "Course : " << c.top() << endl;
         c.pop();
 
-        cout << "Interest Field : " << s.top() << endl;
+        cout << "Field of Interest : " << s.top() << endl;
         s.pop();
 
         cout << endl
@@ -891,7 +894,7 @@ void displayDataCourse(string cor)
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
         }
 
         n.pop();
@@ -925,7 +928,7 @@ void displayDataName(string nm)
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
         }
 
         n.pop();
@@ -958,7 +961,7 @@ void displayDataAdm(long int ad)
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
         }
 
         n.pop();
@@ -991,7 +994,7 @@ void displayDataYear(int yrr)
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
         }
 
         n.pop();
@@ -1024,7 +1027,7 @@ void displayDataField(string fld)
             cout << "Admission Number : " << a.top() << endl;
             cout << "College Year : " << y.top() << endl;
             cout << "Course : " << c.top() << endl;
-            cout << "Interest Field : " << s.top() << endl;
+            cout << "Field of Interest : " << s.top() << endl;
         }
 
         n.pop();
@@ -1047,7 +1050,7 @@ void nameView(manage data)
     stack<int> temp1;    // used to store the serial number for further display purpose
     stack<string> temp2; // used to store the string ,respective to it's serial no. for display purpose
     int key;
-    cout << "\nThe course fields through which u want to access the dataset : \n\n";
+    cout << "\n     Select the preferred Name to access data : \n\n";
     int i = 1;
     bool flag;
 
@@ -1074,13 +1077,13 @@ void nameView(manage data)
     cout << endl
          << endl;
     string str = "Press the key according to your Preference :";
-    cout << "     ";
+    cout << "    ";
     for (int i = 0; i < str.size(); i++)
     {
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n   ==> ";
     cin >> key;
 
     while (!temp1.empty())
@@ -1102,7 +1105,7 @@ void nameView(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -1126,7 +1129,7 @@ void admView(manage data)
     stack<int> temp1; // used to store the serial number for further display purpose
     stack<int> temp2;
     int key;
-    cout << "\nThe course fields through which u want to access the dataset : \n\n";
+    cout << "\n    Select the preferred Admission No. to access data : \n\n";
     int i = 1;
     bool flag;
 
@@ -1144,7 +1147,7 @@ void admView(manage data)
 
         if (s1 != s2 || flag == true)
         {
-            cout << "  (" << i << ") " << s1 << endl;
+            cout << "    (" << i << ") " << s1 << endl;
             temp1.push(i);
             temp2.push(s1);
             i++;
@@ -1153,13 +1156,13 @@ void admView(manage data)
     cout << endl
          << endl;
     string str = "Press the key according to your Preference :";
-    cout << "     ";
+    cout << "    ";
     for (int i = 0; i < str.size(); i++)
     {
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n ==> ";
     cin >> key;
 
     while (!temp1.empty())
@@ -1181,7 +1184,7 @@ void admView(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -1205,7 +1208,7 @@ void courseView(manage data)
     stack<int> temp1;    // used to store the serial number for further display purpose
     stack<string> temp2; // used to store the string ,respective to it's serial no. for display purpose
     int key;
-    cout << "\nThe course fields through which u want to access the dataset : \n\n";
+    cout << "\n    Select the preferred Course to access data : \n\n";
     int i = 1;
     bool flag;
 
@@ -1223,7 +1226,7 @@ void courseView(manage data)
 
         if (s1 != s2 || flag == true)
         {
-            cout << "  (" << i << ") " << s1 << endl;
+            cout << "    (" << i << ") " << s1 << endl;
             temp1.push(i);
             temp2.push(s1);
             i++;
@@ -1232,13 +1235,13 @@ void courseView(manage data)
     cout << endl
          << endl;
     string str = "Press the key according to your Preference :";
-    cout << "     ";
+    cout << "    ";
     for (int i = 0; i < str.size(); i++)
     {
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n ==> ";
     cin >> key;
 
     while (!temp1.empty())
@@ -1260,7 +1263,7 @@ void courseView(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -1284,7 +1287,7 @@ void yearView(manage data)
     stack<int> temp1; // used to store the serial number for further display purpose
     stack<int> temp2;
     int key;
-    cout << "\nThe course fields through which u want to access the dataset : \n\n";
+    cout << "\n    Select the preferred College Year to access data : \n\n";
     int i = 1;
     bool flag;
 
@@ -1302,7 +1305,7 @@ void yearView(manage data)
 
         if (s1 != s2 || flag == true)
         {
-            cout << "  (" << i << ") " << s1 << endl;
+            cout << "    (" << i << ") " << s1 << endl;
             temp1.push(i);
             temp2.push(s1);
             i++;
@@ -1311,13 +1314,13 @@ void yearView(manage data)
     cout << endl
          << endl;
     string str = "Press the key according to your Preference :";
-    cout << "     ";
+    cout << "    ";
     for (int i = 0; i < str.size(); i++)
     {
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n ==> ";
     cin >> key;
 
     while (!temp1.empty())
@@ -1339,7 +1342,7 @@ void yearView(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -1363,7 +1366,7 @@ void fieldView(manage data)
     stack<int> temp1;    // used to store the serial number for further display purpose
     stack<string> temp2; // used to store the string ,respective to it's serial no. for display purpose
     int key;
-    cout << "\nThe course fields through which u want to access the dataset : \n\n";
+    cout << "\n    Select the preferred Field of Interest to access data : \n\n";
     int i = 1;
     bool flag;
 
@@ -1381,7 +1384,7 @@ void fieldView(manage data)
 
         if (s1 != s2 || flag == true)
         {
-            cout << "  (" << i << ") " << s1 << endl;
+            cout << "    (" << i << ") " << s1 << endl;
             temp1.push(i);
             temp2.push(s1);
             i++;
@@ -1390,13 +1393,13 @@ void fieldView(manage data)
     cout << endl
          << endl;
     string str = "Press the key according to your Preference :";
-    cout << "     ";
+    cout << "    ";
     for (int i = 0; i < str.size(); i++)
     {
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n ==> ";
 
     cin >> key;
 
@@ -1419,7 +1422,7 @@ void fieldView(manage data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
@@ -1445,12 +1448,12 @@ void manage::desireData(manage data)
     do
     {
         system("cls");
-        cout << "\n         You want to access data through which field :\n\n";
+        cout << "\n         Select a search field to access data :\n\n";
         cout << "          (1) Name\n";
         cout << "          (2) Admission No.\n";
         cout << "          (3) Course\n";
-        cout << "          (4) Graduation Year\n";
-        cout << "          (5) Interest Field\n";
+        cout << "          (4) College Year\n";
+        cout << "          (5) Field of Interest\n";
         cout << "          (6) Back  \n\n";
 
         string str = "Press the key according to your Preference :";
@@ -1503,6 +1506,8 @@ void exitMain();
 
 int main()
 {
+    system("cls");
+    system("COLOR B0");
     int key = 0;
 
     manage data;
@@ -1516,7 +1521,8 @@ int main()
     do
     {
         system("cls");
-        cout << "             ";
+
+        cout << "                   ";
         string str = "============== Student Database Management System  ==============";
         for (int i = 0; i < str.size(); i++)
         {
@@ -1526,12 +1532,12 @@ int main()
         cout << "\n\n                     (1) Insert Data  \n";
         cout << "                     (2) Update Data  \n";
         cout << "                     (3) Delete Data  \n";
-        cout << "                     (4) Retrieve All Database  \n";
-        cout << "                     (5) Retrive  Data of some Desired Fields. \n";
+        cout << "                     (4) Display Entire data  \n";
+        cout << "                     (5) Query Database based on search field \n";
         cout << "                     (6) Exit  \n\n";
         str.clear();
         str = "Press the key according to your Preference :";
-        cout << "                     ";
+        cout << "                      ";
         for (int i = 0; i < str.size(); i++)
         {
             cout << str[i];
@@ -1589,12 +1595,12 @@ void exitMain()
     cout << "\n\n                    ";
     for (int i = 0; i < 5; i++)
         cout << ch << " ";
-    cout << " Sorry, you take the wrong Input ";
+    cout << " Sorry, this is an Invalid Input ";
     for (int i = 0; i < 5; i++)
         cout << ch << " ";
 
     cout << "\n\n                    Want to continue..... ?\n"
-         << "                    Press 'y/Y' to continue or 'n/N' to exit :\n ";
+         << "                     Press 'y/Y' to continue or 'n/N' to exit :\n ";
     cout << "               ==> ";
     cin >> ch;
     if (ch == 'y' || ch == 'Y')
@@ -1610,7 +1616,7 @@ void exit1(manage data)
     cout << "\n\n                    ";
     for (int i = 0; i < 5; i++)
         cout << ch << " ";
-    cout << " Sorry, you take the wrong Input ";
+    cout << " Sorry, this is an Invalid Input ";
     for (int i = 0; i < 5; i++)
         cout << ch << " ";
 
@@ -1631,12 +1637,12 @@ void exit2(manage data)
     cout << "\n\n                    ";
     for (int i = 0; i < 5; i++)
         cout << ch << " ";
-    cout << " Sorry, you take the wrong Input ";
+    cout << " Sorry, this is an Invalid Input ";
     for (int i = 0; i < 5; i++)
         cout << ch << " ";
 
     cout << "\n\n                    Want to continue..... ?\n"
-         << "                    Press 'y/Y' to continue or 'n/N' to back :\n ";
+         << "                     Press 'y/Y' to continue or 'n/N' to back :\n ";
     cout << "               ==> ";
     cin >> ch;
     if (ch == 'y' || ch == 'Y')
@@ -1652,12 +1658,12 @@ void exit3(manage data)
     cout << "\n\n                    ";
     for (int i = 0; i < 5; i++)
         cout << ch << " ";
-    cout << " Sorry, you take the wrong Input ";
+    cout << " Sorry, this is an Invalid Input ";
     for (int i = 0; i < 5; i++)
         cout << ch << " ";
 
     cout << "\n\n                    Want to continue..... ?\n"
-         << "                    Press 'y/Y' to continue or 'n/N' to back :\n ";
+         << "                     Press 'y/Y' to continue or 'n/N' to back :\n ";
     cout << "               ==> ";
     cin >> ch;
     if (ch == 'y' || ch == 'Y')
@@ -1684,12 +1690,12 @@ void deletionConfirm(string nm)
 
         if (name.top() == nm)
         {
-            cout << "\nThe data u want to delete : \n\n";
+            cout << "\nYou have selected this entry to delete : \n\n";
             cout << "Name : " << name.top() << endl;
             cout << "Admission Number : " << admNo.top() << endl;
             cout << "College Year : " << year.top() << endl;
             cout << "Course : " << course.top() << endl;
-            cout << "Interest Field : " << sector.top() << endl;
+            cout << "Field of Interest : " << sector.top() << endl;
 
             break;
         }
@@ -1721,7 +1727,7 @@ void deletionConfirm(string nm)
     course.pop();
     sector.pop();
 
-    cout << "\n\nEnter confirm/Confirm to delete the student data or decline your choice by writing anything : \n";
+    cout << "\n\nEnter confirm/Confirm to proceed or type anything to go Back : \n";
     cout << "=> ";
     cin.ignore();
     getline(cin, confirm);
@@ -1778,14 +1784,14 @@ void manage::deleteData(manage &data)
     stack<int> temp1;
     stack<string> temp2;
     int key;
-    cout << "\nWhich student data, u want to update : \n\n";
+    cout << "\n     Select the Entry you want to Delete : \n\n";
     int i = 1;
     int flag;
     while (!n.empty())
     {
         temp1.push(i);
         temp2.push(n.top());
-        cout << "   (" << i << ") " << n.top() << endl;
+        cout << "    (" << i << ") " << n.top() << endl;
         n.pop();
         i++;
         flag = i;
@@ -1799,7 +1805,7 @@ void manage::deleteData(manage &data)
         cout << str[i];
         Sleep(10);
     }
-    cout << "\n      ==> ";
+    cout << "\n    ==> ";
     cin >> key;
 
     while (!temp1.empty() && !temp2.empty())
@@ -1821,7 +1827,7 @@ void manage::deleteData(manage &data)
         cout << "\n\n                    ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
-        cout << " Sorry, you take the wrong Input ";
+        cout << " Sorry, this is an Invalid Input ";
         for (int i = 0; i < 5; i++)
             cout << ch << " ";
 
