@@ -124,7 +124,7 @@ void displayUpdateName(long int ad)
     n = name;
 
     stack<int> temp3 = temp; // define, in order to run the next->next while loop
-    cout << "Enter the Correct Course Name : ";
+    cout << "Enter the Correct Name : ";
 
     cin.ignore();
     getline(cin, correctName);
@@ -1533,7 +1533,7 @@ int main()
         cout << "                     (2) Update Data  \n";
         cout << "                     (3) Delete Data  \n";
         cout << "                     (4) Display Entire data  \n";
-        cout << "                     (5) Query Database based on search field \n";
+        cout << "                     (5) Search Field \n";
         cout << "                     (6) Exit  \n\n";
         str.clear();
         str = "Press the key according to your Preference :";
