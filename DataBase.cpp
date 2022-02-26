@@ -1,6 +1,4 @@
-#include <iostream>
-#include <stack>
-#include <string>
+#include <bits/stdc++.h>
 #include <windows.h>
 using namespace std;
 
@@ -64,6 +62,7 @@ void manage::insertData(manage &data)
     cout << "\n\n      Name : ";
     cin.ignore();
     getline(cin, data.nam);
+    // cin >> data.nam;
     name.push(data.nam);
 
     cout << "\n      Admission Number : ";
@@ -134,6 +133,7 @@ void displayUpdateName(long int ad)
         temp.pop();
         n.pop();
     }
+
     stack<string> temp2;
 
     while (name.top() != n.top() || !temp3.empty())
@@ -173,6 +173,7 @@ void updateName(manage data)
         a.pop();
         i++;
     }
+
     cout << endl
          << endl;
     string str = " Press the key according to your Preference :";
@@ -391,7 +392,7 @@ void displayUpdateCourse(string nm)
     cout << endl
          << endl;
     c = course;
-    stack<int> temp3 = temp;
+    // stack<int> temp3 = temp;
     cout << "Enter the Correct Course Name : ";
 
     cin.ignore();
@@ -404,10 +405,10 @@ void displayUpdateCourse(string nm)
     }
     stack<string> temp2;
 
-    while (course.top() != c.top() || !temp3.empty())
+    while (course.top() != c.top())
     {
         temp2.push(course.top());
-        temp3.pop();
+        // temp3.pop();
         course.pop();
     }
     course.pop();
@@ -639,6 +640,7 @@ void displayUpdateField(string nm)
     stack<int> temp;
     int i = 1;
     string correctField;
+
     while (!n.empty() && !a.empty() && !y.empty() && !c.empty() && !s.empty())
     {
 
@@ -1365,6 +1367,8 @@ void fieldView(manage data)
     stack<string> f = sector;
     stack<int> temp1;    // used to store the serial number for further display purpose
     stack<string> temp2; // used to store the string ,respective to it's serial no. for display purpose
+    // stack<pair<int,string>> temp;
+
     int key;
     cout << "\n    Select the preferred Field of Interest to access data : \n\n";
     int i = 1;
@@ -1507,20 +1511,38 @@ void exitMain();
 int main()
 {
     system("cls");
-    system("COLOR B0");
+
+    ifstream f1;
+    f1.open("input.csv");
     int key = 0;
 
     manage data;
 
-    data.insertedData(data, "Shubham Kumar", 10211458, "BSc Computer Science", 1, "C++ Programming");
-    data.insertedData(data, "Aditya", 10211453, "BSc Computer Science", 1, "C++ Programming");
-    data.insertedData(data, "Kundan Mishra", 10211454, "BSc Computer Science", 1, "Blockchain");
-    data.insertedData(data, "Kartikey", 10211451, "BSc Computer Science", 1, "Web Development");
-    // try to write comman things in a continuous form like c++ for shubham and c++ for aditya
+    while (f1.good())
+    {
+
+        getline(f1, data.nam);
+        name.push(data.nam);
+
+        f1 >> data.adm;
+        admNo.push(data.adm);
+
+        f1 >> data.yr;
+        year.push(data.yr);
+
+        f1.ignore();
+        getline(f1, data.cor);
+        course.push(data.cor);
+
+        getline(f1, data.itrf);
+        sector.push(data.itrf);
+    }
+    f1.close();
 
     do
     {
         system("cls");
+        system("COLOR B0");
 
         cout << "                   ";
         string str = "============== Student Database Management System  ==============";
@@ -1533,7 +1555,7 @@ int main()
         cout << "                     (2) Update Data  \n";
         cout << "                     (3) Delete Data  \n";
         cout << "                     (4) Display Entire data  \n";
-        cout << "                     (5) Search Field \n";
+        cout << "                     (5) Search Data \n";
         cout << "                     (6) Exit  \n\n";
         str.clear();
         str = "Press the key according to your Preference :";
@@ -1551,26 +1573,31 @@ int main()
         {
         case 1:
             system("cls");
+            system("COLOR A0");
             data.insertData(data);
             break;
 
         case 2:
             system("cls");
+            system("COLOR A0");
             data.updateData(data);
             break;
 
         case 3:
             system("cls");
+            system("COLOR A0");
             data.deleteData(data);
             break;
 
         case 4:
             system("cls");
+            system("COLOR A0");
             data.display();
             break;
 
         case 5:
             system("cls");
+            system("COLOR A0");
             data.desireData(data);
             break;
 
@@ -1581,10 +1608,29 @@ int main()
 
         default:
             exitMain();
-            return -1;
         }
+    } while (key < 6 && key > 0);
 
-    } while (key != 6);
+    ofstream f2;
+    f2.open("output.csv");
+    f2.clear();
+    char ch = 179;
+    while (!name.empty() && !admNo.empty() && !year.empty() && !course.empty() && !sector.empty())
+    {
+        f2 << name.top() << " " << ch << ch << " "
+           << admNo.top() << " " << ch << ch << " "
+           << year.top() << " " << ch << ch << " "
+           << course.top() << " " << ch << ch << " "
+           << sector.top() << endl
+           << endl;
+
+        name.pop();
+        admNo.pop();
+        year.pop();
+        course.pop();
+        sector.pop();
+    }
+    f2.close();
 
     return 0;
 }
